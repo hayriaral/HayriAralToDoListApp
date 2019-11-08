@@ -1,0 +1,53 @@
+﻿<Window x:Class="ToDoListApp.PresentationLayer.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoListApp.PresentationLayer"
+        mc:Ignorable="d"
+        Title="Login" Height="500" Width="500" FontSize="20" Background="#ca8350" WindowStartupLocation="CenterScreen">
+
+    <Border Background="#374553" CornerRadius="20" Margin="20">
+        <StackPanel Margin="20">
+            <Label Content="Login" Foreground="{StaticResource textColor}" FontSize="25" HorizontalAlignment="Center">
+            </Label>
+            <Separator></Separator>
+            <Label x:Name="userNameLabel"
+                   Content="Username:"
+                   Foreground="{StaticResource textColor}"
+                   Margin="5">
+            </Label>
+            <TextBox x:Name="userNameTextBox"
+                     Background="#545d6a"
+                     Foreground="{StaticResource textColor}"
+                     FontSize="25"
+                     Margin="5">
+            </TextBox>
+            <Label x:Name="userPasswordLabel"
+                   Content="Password:"
+                   Foreground="{StaticResource textColor}"
+                   Margin="5">
+            </Label>
+            <PasswordBox x:Name="userPasswordPasswordBox"
+                         Background="#545d6a"
+                         Foreground="{StaticResource textColor}"
+                         FontSize="25"
+                         Margin="5">
+            </PasswordBox>
+            <Button x:Name="signInButton"
+                    Content="Sign In"
+                    Background="#97be50"
+                    Foreground="{StaticResource textColor}"
+                    Margin="80,10"
+                    Click="SignInButton_Click">
+            </Button>
+            <Button x:Name="signUpButton"
+                    Content="Sign Up"
+                    Background="#2f7ca1"
+                    Foreground="{StaticResource textColor}"
+                    Margin="100,10"
+                    Click="SignUpButton_Click">
+            </Button>
+        </StackPanel>
+    </Border>
+</Window>

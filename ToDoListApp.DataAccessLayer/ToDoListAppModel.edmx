@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HayriAralToDoListDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ToDoItem">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="itemName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="itemDescription" Type="nvarchar(max)" />
+          <Property Name="itemDeadline" Type="datetime" Nullable="false" />
+          <Property Name="itemStatus" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="itemCreateDate" Type="datetime" Nullable="false" />
+          <Property Name="listId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="isEligible" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToDoList">
+          <Key>
+            <PropertyRef Name="listId" />
+          </Key>
+          <Property Name="listId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="listName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="listCreateDate" Type="datetime" Nullable="false" />
+          <Property Name="isEligible" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="userPassword" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ToDoItem_ToDoList">
+          <End Role="ToDoList" Type="Self.ToDoList" Multiplicity="1" />
+          <End Role="ToDoItem" Type="Self.ToDoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToDoList">
+              <PropertyRef Name="listId" />
+            </Principal>
+            <Dependent Role="ToDoItem">
+              <PropertyRef Name="listId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToDoList_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ToDoList" Type="Self.ToDoList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="ToDoList">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HayriAralToDoListDBModelStoreContainer">
+          <EntitySet Name="ToDoItem" EntityType="Self.ToDoItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ToDoList" EntityType="Self.ToDoList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ToDoItem_ToDoList" Association="Self.FK_ToDoItem_ToDoList">
+            <End Role="ToDoList" EntitySet="ToDoList" />
+            <End Role="ToDoItem" EntitySet="ToDoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToDoList_User" Association="Self.FK_ToDoList_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ToDoList" EntitySet="ToDoList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HayriAralToDoListDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ToDoItem">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="Guid" Nullable="false" />
+          <Property Name="itemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="itemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="itemDeadline" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="itemStatus" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="itemCreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="listId" Type="Guid" Nullable="false" />
+          <Property Name="isEligible" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ToDoList" Relationship="Self.FK_ToDoItem_ToDoList" FromRole="ToDoItem" ToRole="ToDoList" />
+        </EntityType>
+        <EntityType Name="ToDoList">
+          <Key>
+            <PropertyRef Name="listId" />
+          </Key>
+          <Property Name="listId" Type="Guid" Nullable="false" />
+          <Property Name="listName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userId" Type="Guid" Nullable="false" />
+          <Property Name="listCreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isEligible" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ToDoItems" Relationship="Self.FK_ToDoItem_ToDoList" FromRole="ToDoList" ToRole="ToDoItem" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ToDoList_User" FromRole="ToDoList" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Guid" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userPassword" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ToDoLists" Relationship="Self.FK_ToDoList_User" FromRole="User" ToRole="ToDoList" />
+        </EntityType>
+        <Association Name="FK_ToDoItem_ToDoList">
+          <End Role="ToDoList" Type="Self.ToDoList" Multiplicity="1" />
+          <End Role="ToDoItem" Type="Self.ToDoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ToDoList">
+              <PropertyRef Name="listId" />
+            </Principal>
+            <Dependent Role="ToDoItem">
+              <PropertyRef Name="listId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToDoList_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ToDoList" Type="Self.ToDoList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="ToDoList">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HayriAralToDoListDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ToDoItems" EntityType="Self.ToDoItem" />
+          <EntitySet Name="ToDoLists" EntityType="Self.ToDoList" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_ToDoItem_ToDoList" Association="Self.FK_ToDoItem_ToDoList">
+            <End Role="ToDoList" EntitySet="ToDoLists" />
+            <End Role="ToDoItem" EntitySet="ToDoItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToDoList_User" Association="Self.FK_ToDoList_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ToDoList" EntitySet="ToDoLists" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HayriAralToDoListDBModelStoreContainer" CdmEntityContainer="HayriAralToDoListDBEntities">
+          <EntitySetMapping Name="ToDoItems">
+            <EntityTypeMapping TypeName="HayriAralToDoListDBModel.ToDoItem">
+              <MappingFragment StoreEntitySet="ToDoItem">
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+                <ScalarProperty Name="itemDeadline" ColumnName="itemDeadline" />
+                <ScalarProperty Name="itemStatus" ColumnName="itemStatus" />
+                <ScalarProperty Name="itemCreateDate" ColumnName="itemCreateDate" />
+                <ScalarProperty Name="listId" ColumnName="listId" />
+                <ScalarProperty Name="isEligible" ColumnName="isEligible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToDoLists">
+            <EntityTypeMapping TypeName="HayriAralToDoListDBModel.ToDoList">
+              <MappingFragment StoreEntitySet="ToDoList">
+                <ScalarProperty Name="listId" ColumnName="listId" />
+                <ScalarProperty Name="listName" ColumnName="listName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="listCreateDate" ColumnName="listCreateDate" />
+                <ScalarProperty Name="isEligible" ColumnName="isEligible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HayriAralToDoListDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

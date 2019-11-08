@@ -1,0 +1,70 @@
+﻿<Window x:Class="ToDoListApp.PresentationLayer.AddToDoItemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoListApp.PresentationLayer"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Add To-Do Item" Height="500" Width="500" FontSize="15" Background="#ca8350" WindowStartupLocation="CenterScreen">
+    <Border Background="#374553" CornerRadius="20" Margin="20">
+        <StackPanel Margin="20">
+            <Label Content="Add To-Do Item" Foreground="{StaticResource textColor}" FontSize="25" HorizontalAlignment="Center">
+            </Label>
+            <Separator></Separator>
+            <Label x:Name="listNameLabel"
+                   Content="Name:"
+                   Foreground="{StaticResource textColor}"
+                   Margin="5">
+            </Label>
+            <TextBox x:Name="itemNameTextBox"
+                     Background="#545d6a"
+                     Foreground="{StaticResource textColor}"
+                     FontSize="20"
+                     Margin="5">
+            </TextBox>
+            <Label x:Name="itemDescriptionLabel"
+                   Content="Description:"
+                   Foreground="{StaticResource textColor}"
+                   Margin="5">
+            </Label>
+            <TextBox x:Name="itemDescriptionTextBox"
+                     Background="#545d6a"
+                     Foreground="{StaticResource textColor}"
+                     FontSize="20"
+                     Margin="5">
+            </TextBox>
+            <Label x:Name="itemDeadlineLabel"
+                   Content="Deadline:"
+                   Foreground="{StaticResource textColor}"
+                   Margin="5">
+            </Label>
+            <DatePicker x:Name="itemDeadlineDatePicker"
+                        Background="#545d6a"
+                        Foreground="Black"
+                        FontSize="20"
+                        Margin="5"
+                        DisplayDateStart="{x:Static sys:DateTime.Today}">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="IsReadOnly" Value="True"/>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+            <Button x:Name="submitButton"
+                    Content="Submit"
+                    Background="#97be50"
+                    Foreground="{StaticResource textColor}"
+                    Margin="80,10"
+                    Click="SubmitButton_Click">
+            </Button>
+            <Button x:Name="backButton"
+                    Content="Back"
+                    Background="#d13745"
+                    Foreground="{StaticResource textColor}"
+                    Margin="100,10"
+                    Click="BackButton_Click">
+            </Button>
+        </StackPanel>
+    </Border>
+</Window>

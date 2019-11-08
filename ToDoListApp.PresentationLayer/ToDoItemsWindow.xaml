@@ -1,0 +1,132 @@
+﻿<Window x:Class="ToDoListApp.PresentationLayer.ToDoItemsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoListApp.PresentationLayer"
+        mc:Ignorable="d"
+        Title="To-Do Items" Height="800" Width="800" FontSize="10" Background="#ca8350" WindowStartupLocation="CenterScreen">
+    <Border Background="#374553" CornerRadius="20" Margin="20">
+        <Grid Margin="5" x:Name="mainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="itemTitleStackPanel" Margin="10" Grid.Row="0" Grid.ColumnSpan="7">
+
+            </StackPanel>
+            <Label x:Name="orderByLabel"
+                   Content="Order By:"
+                   Margin="5"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   FontSize="15"
+                   Foreground="{StaticResource textColor}">
+            </Label>
+            <Button x:Name="orderByNameButton"
+                    Content="Name▼"
+                    Margin="10"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    FontSize="12"
+                    Click="OrderButtons_Click">
+            </Button>
+            <Button x:Name="orderByCreateDateButton"
+                    Content="Create Date▼"
+                    Margin="10"
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    FontSize="12"
+                    Click="OrderButtons_Click">
+            </Button>
+            <Button x:Name="orderByDeadlineButton"
+                    Content="Deadline▼"
+                    Margin="10"
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    FontSize="12"
+                    Click="OrderButtons_Click">
+            </Button>
+            <Button x:Name="orderByStatusButton"
+                    Content="Status▼"
+                    Margin="10"
+                    Grid.Row="1"
+                    Grid.Column="5"
+                    FontSize="12"
+                    Click="OrderButtons_Click">
+            </Button>
+            <Label x:Name="nameLabel"
+                   Content="Name:"
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="3"
+                   Style="{StaticResource itemComponentsLabelStyle}">
+            </Label>
+            <Label x:Name="deadlineLabel"
+                   Content="Deadline:"
+                   Grid.Row="2"
+                   Grid.Column="4"
+                   Style="{StaticResource itemComponentsLabelStyle}">
+            </Label>
+            <Label x:Name="statusLabel"
+                   Content="Status:"
+                   Grid.Row="2"
+                   Grid.Column="5"
+                   Style="{StaticResource itemComponentsLabelStyle}">
+            </Label>
+            <StackPanel x:Name="itemMarkStackPanel" Margin="5" Grid.Row="3"
+                        Grid.Column="0">
+                
+            </StackPanel>
+            <StackPanel x:Name="itemNameStackPanel" Margin="5" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3">
+
+            </StackPanel>
+            <StackPanel x:Name="itemDeadlineStackPanel" Margin="5" Grid.Row="3"
+                        Grid.Column="4">
+                
+            </StackPanel>
+            <StackPanel x:Name="itemStatusStackPanel" Margin="5" Grid.Row="3" Grid.Column="5">
+                
+            </StackPanel>
+            <StackPanel x:Name="itemDeleteIconStackPanel" Margin="5" Grid.Row="3" Grid.Column="6">
+
+            </StackPanel>
+            <DockPanel x:Name="filterDockPanel" Margin="5" Grid.Row="4" Grid.ColumnSpan="7">
+
+            </DockPanel>
+            <StackPanel x:Name="actionStackPanel" Margin="5" Grid.Row="5" Grid.ColumnSpan="7">
+                <Button x:Name="addToDoItemButton" 
+                        Margin="250,10"
+                        Content="Add To-Do Item"
+                        Background="#1a865e"
+                        Foreground="{StaticResource textColor}"
+                        FontSize="12"
+                        Click="AddToDoItemButton_Click">
+                </Button>
+                <Button x:Name="backButton" 
+                        Margin="300,10"
+                        Content="Back"
+                        Background="#d13745"
+                        Foreground="{StaticResource textColor}"
+                        FontSize="12"
+                        Click="BackButton_Click">
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
